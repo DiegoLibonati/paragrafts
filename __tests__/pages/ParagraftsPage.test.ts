@@ -3,15 +3,15 @@ import userEvent from "@testing-library/user-event";
 
 import type { Page } from "@/types/pages";
 
-import LoremIpsumPage from "@/pages/LoremIpsumPage/LoremIpsumPage";
+import ParagraftsPage from "@/pages/ParagraftsPage/ParagraftsPage";
 
 const renderPage = (): Page => {
-  const page = LoremIpsumPage();
+  const page = ParagraftsPage();
   document.body.appendChild(page);
   return page;
 };
 
-describe("LoremIpsumPage", () => {
+describe("ParagraftsPage", () => {
   afterEach(() => {
     document.body.innerHTML = "";
   });

@@ -1,13 +1,13 @@
 import "@/index.css";
-import LoremIpsumPage from "@/pages/LoremIpsumPage/LoremIpsumPage";
+import ParagraftsPage from "@/pages/ParagraftsPage/ParagraftsPage";
 
 const onInit = (): void => {
   const app = document.querySelector<HTMLDivElement>("#app");
 
   if (!app) throw new Error(`You must render a container to mount the app.`);
 
-  const loremIpsumPage = LoremIpsumPage();
-  app.appendChild(loremIpsumPage);
+  const paragraftsPage = ParagraftsPage();
+  app.appendChild(paragraftsPage);
 };
 
 document.addEventListener("DOMContentLoaded", onInit);

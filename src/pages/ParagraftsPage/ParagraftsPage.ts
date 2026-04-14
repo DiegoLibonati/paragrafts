@@ -4,11 +4,11 @@ import Paragraph from "@/components/Paragraph/Paragraph";
 
 import paragraphs from "@/constants/paragraphs";
 
-import "@/pages/LoremIpsumPage/LoremIpsumPage.css";
+import "@/pages/ParagraftsPage/ParagraftsPage.css";
 
-const LoremIpsumPage = (): Page => {
+const ParagraftsPage = (): Page => {
   const main = document.createElement("main") as Page;
-  main.className = "lorem-ipsum-page";
+  main.className = "paragrafts-page";
   main.setAttribute("aria-label", "Lorem ipsum generator");
 
   main.innerHTML = `
@@ -72,4 +72,4 @@ const LoremIpsumPage = (): Page => {
   return main;
 };
 
-export default LoremIpsumPage;
+export default ParagraftsPage;
