@@ -1,4 +1,4 @@
-# Lorem Ipsum Page
+# Paragrafts
 
 ## Educational Purpose
 
@@ -17,7 +17,13 @@ The application will open automatically at `http://localhost:3000`
 
 ## Description
 
-I made a web page that allows the user to display different paragraphs. Once the user enters the number of paragraphs to display and press `Generate`, it will generate the number of paragraphs the user entered. If the user entered 7 and pressed `Generate`, 7 random paragraphs of lorem ipsum will be displayed.
+**Paragrafts** is a lightweight, zero-dependency Lorem Ipsum generator built as a single-page application. It lets you instantly produce any number of placeholder text paragraphs — just type how many you need and hit **Generate**.
+
+Each generation randomly picks from a curated pool of Lorem Ipsum paragraphs, so the output varies every time rather than always starting with the same tired _"Lorem ipsum dolor sit amet..."_ opening. The paragraphs are rendered immediately in the browser with no page reload, no network requests, and no external dependencies at runtime.
+
+The application is designed to be fast and friction-free: open it, enter a number, get your placeholder text. It works entirely client-side, making it suitable for use offline or embedded in any static hosting environment. The interface is minimal by design — a single input, a single button, and a clean output area — so it stays out of the way and lets you copy what you need without distractions.
+
+Under the hood, Paragrafts is written in vanilla TypeScript with no framework, compiled and served through Vite. All components are plain TypeScript factory functions that return DOM elements directly, with no virtual DOM or reactivity layer involved. The codebase follows strict TypeScript settings, includes a full Jest test suite with 100% coverage, and enforces code quality through ESLint and Prettier with pre-commit hooks via Husky.
 
 ## Technologies used
 
@@ -59,11 +65,7 @@ No production dependencies - Pure Vanilla TypeScript
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/Lorem-Ipsum-Page`](https://www.diegolibonati.com.ar/#/project/Lorem-Ipsum-Page)
-
-## Video
-
-https://github.com/DiegoLibonati/Lorem-Ipsum-Page/assets/99032604/43038cfd-c1f1-4419-bef9-6197340d1d0a
+[`https://www.diegolibonati.com.ar/#/project/paragrafts`](https://www.diegolibonati.com.ar/#/project/paragrafts)
 
 ## Testing
 

@@ -1,37 +1,56 @@
+import { screen } from "@testing-library/dom";
+
 import type { ParagraphProps } from "@/types/props";
 import type { ParagraphComponent } from "@/types/components";
 
 import Paragraph from "@/components/Paragraph/Paragraph";
 
-const renderComponent = (props: ParagraphProps): ParagraphComponent => {
-  const container = Paragraph(props);
-  document.body.appendChild(container);
-  return container;
+const defaultProps: ParagraphProps = {
+  children: "Lorem ipsum dolor sit amet.",
 };
 
-describe("Paragraph Component", () => {
+const renderComponent = (
+  props: Partial<ParagraphProps> = {}
+): ParagraphComponent => {
+  const element = Paragraph({ ...defaultProps, ...props });
+  document.body.appendChild(element);
+  return element;
+};
+
+describe("Paragraph", () => {
   afterEach(() => {
     document.body.innerHTML = "";
   });
 
-  it("should render paragraph with content", () => {
-    renderComponent({ children: "This is a test paragraph." });
+  describe("rendering", () => {
+    it("should render a paragraph element", () => {
+      renderComponent();
+      expect(
+        screen.getByText("Lorem ipsum dolor sit amet.")
+      ).toBeInTheDocument();
+    });
 
-    const paragraph = document.querySelector<HTMLParagraphElement>(
-      ".lorem-ipsum__paragraph"
-    );
-    expect(paragraph).toBeInTheDocument();
-    expect(paragraph?.tagName).toBe("P");
-    expect(paragraph?.innerHTML).toBe("This is a test paragraph.");
-  });
+    it("should have the lorem-ipsum__paragraph class", () => {
+      renderComponent();
+      expect(screen.getByText("Lorem ipsum dolor sit amet.")).toHaveClass(
+        "lorem-ipsum__paragraph"
+      );
+    });
 
-  it("should render empty paragraph when no children provided", () => {
-    renderComponent({ children: "" });
+    it("should render the provided children as content", () => {
+      renderComponent({ children: "Custom paragraph text." });
+      expect(screen.getByText("Custom paragraph text.")).toBeInTheDocument();
+    });
 
-    const paragraph = document.querySelector<HTMLParagraphElement>(
-      ".lorem-ipsum__paragraph"
-    );
-    expect(paragraph).toBeInTheDocument();
-    expect(paragraph?.innerHTML).toBe("");
+    it("should render an empty paragraph when children is not provided", () => {
+      const element = Paragraph({});
+      document.body.appendChild(element);
+      expect(element.innerHTML).toBe("");
+    });
+
+    it("should render an empty paragraph when children is an empty string", () => {
+      const element = renderComponent({ children: "" });
+      expect(element.innerHTML).toBe("");
+    });
   });
 });

@@ -6,9 +6,9 @@ import type { Page } from "@/types/pages";
 import LoremIpsumPage from "@/pages/LoremIpsumPage/LoremIpsumPage";
 
 const renderPage = (): Page => {
-  const container = LoremIpsumPage();
-  document.body.appendChild(container);
-  return container;
+  const page = LoremIpsumPage();
+  document.body.appendChild(page);
+  return page;
 };
 
 describe("LoremIpsumPage", () => {
@@ -16,116 +16,141 @@ describe("LoremIpsumPage", () => {
     document.body.innerHTML = "";
   });
 
-  it("should render the page with correct structure", () => {
-    renderPage();
-
-    const main = document.querySelector<HTMLElement>(".lorem-ipsum-page");
-    expect(main).toBeInTheDocument();
-    expect(main?.tagName).toBe("MAIN");
-  });
-
-  it("should render page title", () => {
-    renderPage();
-
-    const title = screen.getByRole("heading", {
-      name: "TIRED OF BORING LOREM IPSUM?",
-    });
-    expect(title).toBeInTheDocument();
-  });
-
-  it("should render form with input and button", () => {
-    renderPage();
-
-    const input = document.querySelector<HTMLInputElement>(
-      ".lorem-ipsum__input"
-    );
-    const button = screen.getByRole("button", {
-      name: "Generate lorem ipsum paragraphs",
+  describe("rendering", () => {
+    it("should render a main element with the correct aria-label", () => {
+      renderPage();
+      expect(
+        screen.getByRole("main", { name: "Lorem ipsum generator" })
+      ).toBeInTheDocument();
     });
 
-    expect(input).toBeInTheDocument();
-    expect(input?.type).toBe("number");
-    expect(button).toBeInTheDocument();
-    expect((button as HTMLButtonElement).type).toBe("submit");
-  });
-
-  it("should generate paragraphs when form is submitted", async () => {
-    const user = userEvent.setup();
-    renderPage();
-
-    const input = document.querySelector<HTMLInputElement>(
-      ".lorem-ipsum__input"
-    );
-    const button = screen.getByRole("button", {
-      name: "Generate lorem ipsum paragraphs",
+    it("should render the page title", () => {
+      renderPage();
+      expect(
+        screen.getByRole("heading", { name: "TIRED OF BORING LOREM IPSUM?" })
+      ).toBeInTheDocument();
     });
 
-    if (input) await user.type(input, "3");
-    await user.click(button);
-
-    const paragraphs = document.querySelectorAll<HTMLParagraphElement>(
-      ".lorem-ipsum__paragraph"
-    );
-    expect(paragraphs).toHaveLength(3);
-  });
-
-  it("should clear previous paragraphs when generating new ones", async () => {
-    const user = userEvent.setup();
-    renderPage();
-
-    const input = document.querySelector<HTMLInputElement>(
-      ".lorem-ipsum__input"
-    );
-    const button = screen.getByRole("button", {
-      name: "Generate lorem ipsum paragraphs",
+    it("should render the paragraphs input", () => {
+      renderPage();
+      expect(screen.getByLabelText("Number of paragraphs")).toBeInTheDocument();
     });
 
-    if (input) await user.type(input, "2");
-    await user.click(button);
-
-    let paragraphs = document.querySelectorAll<HTMLParagraphElement>(
-      ".lorem-ipsum__paragraph"
-    );
-    expect(paragraphs).toHaveLength(2);
-
-    if (input) {
-      await user.clear(input);
-      await user.type(input, "4");
-    }
-    await user.click(button);
-
-    paragraphs = document.querySelectorAll<HTMLParagraphElement>(
-      ".lorem-ipsum__paragraph"
-    );
-    expect(paragraphs).toHaveLength(4);
-  });
-
-  it("should generate no paragraphs when input is 0", async () => {
-    const user = userEvent.setup();
-    renderPage();
-
-    const input = document.querySelector<HTMLInputElement>(
-      ".lorem-ipsum__input"
-    );
-    const button = screen.getByRole("button", {
-      name: "Generate lorem ipsum paragraphs",
+    it("should render the generate button", () => {
+      renderPage();
+      expect(
+        screen.getByRole("button", { name: "Generate lorem ipsum paragraphs" })
+      ).toBeInTheDocument();
     });
 
-    if (input) await user.type(input, "0");
-    await user.click(button);
-
-    const paragraphs = document.querySelectorAll<HTMLParagraphElement>(
-      ".lorem-ipsum__paragraph"
-    );
-    expect(paragraphs).toHaveLength(0);
+    it("should render an empty article for generated paragraphs initially", () => {
+      renderPage();
+      const article = screen.getByRole("article", {
+        name: "Generated paragraphs",
+      });
+      expect(article).toBeInTheDocument();
+      expect(article.children).toHaveLength(0);
+    });
   });
 
-  it("should cleanup event listener on page cleanup", () => {
-    const page = renderPage();
+  describe("behavior", () => {
+    describe("when the form is submitted", () => {
+      it("should generate the correct number of paragraphs", async () => {
+        jest.spyOn(Math, "random").mockReturnValue(0);
+        const user = userEvent.setup();
+        renderPage();
+        const input = screen.getByLabelText("Number of paragraphs");
+        const button = screen.getByRole("button", {
+          name: "Generate lorem ipsum paragraphs",
+        });
+        await user.type(input, "3");
+        await user.click(button);
+        const generatedParagraphs =
+          document.querySelectorAll<HTMLParagraphElement>(
+            ".lorem-ipsum__paragraph"
+          );
+        expect(generatedParagraphs).toHaveLength(3);
+      });
 
-    expect(page.cleanup).toBeDefined();
-    page.cleanup?.();
+      it("should generate paragraphs with content from the paragraphs constant", async () => {
+        jest.spyOn(Math, "random").mockReturnValue(0);
+        const user = userEvent.setup();
+        renderPage();
+        const input = screen.getByLabelText("Number of paragraphs");
+        const button = screen.getByRole("button", {
+          name: "Generate lorem ipsum paragraphs",
+        });
+        await user.type(input, "1");
+        await user.click(button);
+        expect(
+          screen.getByText(
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          )
+        ).toBeInTheDocument();
+      });
 
-    expect(page.cleanup).toBeDefined();
+      it("should clear previous paragraphs on a new submission", async () => {
+        jest.spyOn(Math, "random").mockReturnValue(0);
+        const user = userEvent.setup();
+        renderPage();
+        const input = screen.getByLabelText("Number of paragraphs");
+        const button = screen.getByRole("button", {
+          name: "Generate lorem ipsum paragraphs",
+        });
+        await user.type(input, "3");
+        await user.click(button);
+        await user.clear(input);
+        await user.type(input, "1");
+        await user.click(button);
+        const generatedParagraphs =
+          document.querySelectorAll<HTMLParagraphElement>(
+            ".lorem-ipsum__paragraph"
+          );
+        expect(generatedParagraphs).toHaveLength(1);
+      });
+
+      it("should generate 0 paragraphs when input value is 0", async () => {
+        const user = userEvent.setup();
+        renderPage();
+        const input = screen.getByLabelText("Number of paragraphs");
+        const button = screen.getByRole("button", {
+          name: "Generate lorem ipsum paragraphs",
+        });
+        await user.type(input, "0");
+        await user.click(button);
+        const generatedParagraphs =
+          document.querySelectorAll<HTMLParagraphElement>(
+            ".lorem-ipsum__paragraph"
+          );
+        expect(generatedParagraphs).toHaveLength(0);
+      });
+
+      it("should generate 0 paragraphs when input is empty", async () => {
+        const user = userEvent.setup();
+        renderPage();
+        const button = screen.getByRole("button", {
+          name: "Generate lorem ipsum paragraphs",
+        });
+        await user.click(button);
+        const generatedParagraphs =
+          document.querySelectorAll<HTMLParagraphElement>(
+            ".lorem-ipsum__paragraph"
+          );
+        expect(generatedParagraphs).toHaveLength(0);
+      });
+    });
+  });
+
+  describe("cleanup", () => {
+    it("should remove the submit event listener on cleanup", () => {
+      const page = renderPage();
+      const form = page.querySelector<HTMLFormElement>(".lorem-ipsum__form")!;
+      const mockRemoveEventListener = jest.spyOn(form, "removeEventListener");
+      page.cleanup!();
+      expect(mockRemoveEventListener).toHaveBeenCalledWith(
+        "submit",
+        expect.any(Function)
+      );
+    });
   });
 });

@@ -1,7 +1,7 @@
 {
-  "name": "Lorem Ipsum",
-  "short_name": "Lorem Ipsum",
-  "description": "I made a web page that allows the user to display different paragraphs. Once the user enters the number of paragraphs to display and press `Generate`, it will generate the number of paragraphs the user entered. If the user entered 7 and pressed `Generate`, 7 random paragraphs of lorem ipsum will be displayed.",
+  "name": "Paragrafts",
+  "short_name": "Paragrafts",
+  "description": "Paragrafts is a lightweight, zero-dependency Lorem Ipsum generator built as a single-page application. It lets you instantly produce any number of placeholder text paragraphs — just type how many you need and hit Generate.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
