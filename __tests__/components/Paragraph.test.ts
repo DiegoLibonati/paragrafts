@@ -30,10 +30,10 @@ describe("Paragraph", () => {
       ).toBeInTheDocument();
     });
 
-    it("should have the lorem-ipsum__paragraph class", () => {
+    it("should have the paragrafts__paragraph class", () => {
       renderComponent();
       expect(screen.getByText("Lorem ipsum dolor sit amet.")).toHaveClass(
-        "lorem-ipsum__paragraph"
+        "paragrafts__paragraph"
       );
     });
 

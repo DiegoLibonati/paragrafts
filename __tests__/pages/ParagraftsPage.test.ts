@@ -67,7 +67,7 @@ describe("ParagraftsPage", () => {
         await user.click(button);
         const generatedParagraphs =
           document.querySelectorAll<HTMLParagraphElement>(
-            ".lorem-ipsum__paragraph"
+            ".paragrafts__paragraph"
           );
         expect(generatedParagraphs).toHaveLength(3);
       });
@@ -104,7 +104,7 @@ describe("ParagraftsPage", () => {
         await user.click(button);
         const generatedParagraphs =
           document.querySelectorAll<HTMLParagraphElement>(
-            ".lorem-ipsum__paragraph"
+            ".paragrafts__paragraph"
           );
         expect(generatedParagraphs).toHaveLength(1);
       });
@@ -120,7 +120,7 @@ describe("ParagraftsPage", () => {
         await user.click(button);
         const generatedParagraphs =
           document.querySelectorAll<HTMLParagraphElement>(
-            ".lorem-ipsum__paragraph"
+            ".paragrafts__paragraph"
           );
         expect(generatedParagraphs).toHaveLength(0);
       });
@@ -134,7 +134,7 @@ describe("ParagraftsPage", () => {
         await user.click(button);
         const generatedParagraphs =
           document.querySelectorAll<HTMLParagraphElement>(
-            ".lorem-ipsum__paragraph"
+            ".paragrafts__paragraph"
           );
         expect(generatedParagraphs).toHaveLength(0);
       });
@@ -144,7 +144,7 @@ describe("ParagraftsPage", () => {
   describe("cleanup", () => {
     it("should remove the submit event listener on cleanup", () => {
       const page = renderPage();
-      const form = page.querySelector<HTMLFormElement>(".lorem-ipsum__form")!;
+      const form = page.querySelector<HTMLFormElement>(".paragrafts__form")!;
       const mockRemoveEventListener = jest.spyOn(form, "removeEventListener");
       page.cleanup!();
       expect(mockRemoveEventListener).toHaveBeenCalledWith(

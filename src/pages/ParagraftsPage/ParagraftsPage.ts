@@ -19,21 +19,21 @@ const ParagraftsPage = (): Page => {
     </section>
 
     <section class="lorem-ipsum" aria-label="Lorem ipsum generator">
-        <form class="lorem-ipsum__form" aria-label="Paragraph count form">
-            <div class="lorem-ipsum__content">
-                <label for="paragraphs-input" class="lorem-ipsum__label">Paragraphs:</label>
-                <input type="number" id="paragraphs-input" class="lorem-ipsum__input" aria-label="Number of paragraphs" />
+        <form class="paragrafts__form" aria-label="Paragraph count form">
+            <div class="paragrafts__content">
+                <label for="paragraphs-input" class="paragrafts__label">Paragraphs:</label>
+                <input type="number" id="paragraphs-input" class="paragrafts__input" aria-label="Number of paragraphs" />
             </div>
             <button
                 type="submit"
                 aria-label="Generate lorem ipsum paragraphs"
-                class="lorem-ipsum__btn-generate"
+                class="paragrafts__btn-generate"
             >
                 GENERATE
             </button>
         </form>
 
-        <article class="lorem-ipsum__paragraphs" aria-label="Generated paragraphs" aria-live="polite"></article>
+        <article class="paragrafts__paragraphs" aria-label="Generated paragraphs" aria-live="polite"></article>
     </section>
   `;
 
@@ -41,9 +41,9 @@ const ParagraftsPage = (): Page => {
     e.preventDefault();
 
     const paragraphsList = main.querySelector<HTMLElement>(
-      ".lorem-ipsum__paragraphs"
+      ".paragrafts__paragraphs"
     )!;
-    const input = main.querySelector<HTMLInputElement>(".lorem-ipsum__input")!;
+    const input = main.querySelector<HTMLInputElement>(".paragrafts__input")!;
 
     paragraphsList.replaceChildren();
 
@@ -61,7 +61,7 @@ const ParagraftsPage = (): Page => {
     }
   };
 
-  const form = main.querySelector<HTMLFormElement>(".lorem-ipsum__form")!;
+  const form = main.querySelector<HTMLFormElement>(".paragrafts__form")!;
 
   form.addEventListener("submit", onSubmitForm);
 

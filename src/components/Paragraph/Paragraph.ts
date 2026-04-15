@@ -5,7 +5,7 @@ import "@/components/Paragraph/Paragraph.css";
 
 const Paragraph = ({ children }: ParagraphProps): ParagraphComponent => {
   const p = document.createElement("p");
-  p.className = "lorem-ipsum__paragraph";
+  p.className = "paragrafts__paragraph";
 
   p.innerHTML = children ?? "";
 

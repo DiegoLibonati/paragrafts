@@ -30,7 +30,7 @@
   width: 100%;
 }
 
-.lorem-ipsum__form {
+.paragrafts__form {
   width: 100%;
   display: flex;
   flex-flow: column wrap;
@@ -38,19 +38,19 @@
   justify-content: center;
 }
 
-.lorem-ipsum__content {
+.paragrafts__content {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
-.lorem-ipsum__label {
+.paragrafts__label {
   padding: 0.625rem;
   font-size: 1.125rem;
 }
 
-.lorem-ipsum__input {
+.paragrafts__input {
   max-width: 5rem;
   max-height: 1.875rem;
   font-size: 0.9375rem;
@@ -59,7 +59,7 @@
   border: 0.0625rem solid var(--color-black);
 }
 
-.lorem-ipsum__btn-generate {
+.paragrafts__btn-generate {
   font-size: 0.9375rem;
   border: 0.0625rem solid var(--color-black);
   padding-top: 0.3125rem;
@@ -73,7 +73,7 @@
   width: fit-content;
 }
 
-.lorem-ipsum__paragraphs {
+.paragrafts__paragraphs {
   width: 75%;
   display: flex;
   flex-flow: column wrap;
