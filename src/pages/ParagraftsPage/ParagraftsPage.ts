@@ -18,7 +18,7 @@ const ParagraftsPage = (): Page => {
         </div>
     </section>
 
-    <section class="lorem-ipsum" aria-label="Lorem ipsum generator">
+    <section class="paragrafts" aria-label="Lorem ipsum generator">
         <form class="paragrafts__form" aria-label="Paragraph count form">
             <div class="paragrafts__content">
                 <label for="paragraphs-input" class="paragrafts__label">Paragraphs:</label>
