@@ -5,6 +5,15 @@ import type { Page } from "@/types/pages";
 
 import ParagraftsPage from "@/pages/ParagraftsPage/ParagraftsPage";
 
+jest.mock("@/constants/paragraphs", () => {
+  const mockData = jest.requireActual("@tests/__mocks__/paragraphs.mock");
+  const { mockParagraphs } = mockData;
+  return {
+    __esModule: true,
+    default: mockParagraphs,
+  };
+});
+
 const renderPage = (): Page => {
   const page = ParagraftsPage();
   document.body.appendChild(page);
