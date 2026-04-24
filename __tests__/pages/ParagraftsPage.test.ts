@@ -23,6 +23,7 @@ const renderPage = (): Page => {
 describe("ParagraftsPage", () => {
   afterEach(() => {
     document.body.innerHTML = "";
+    jest.clearAllMocks();
   });
 
   describe("rendering", () => {

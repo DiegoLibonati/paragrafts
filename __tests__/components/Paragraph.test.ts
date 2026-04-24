@@ -20,6 +20,7 @@ const renderComponent = (
 describe("Paragraph", () => {
   afterEach(() => {
     document.body.innerHTML = "";
+    jest.clearAllMocks();
   });
 
   describe("rendering", () => {
@@ -43,14 +44,13 @@ describe("Paragraph", () => {
     });
 
     it("should render an empty paragraph when children is not provided", () => {
-      const element = Paragraph({});
-      document.body.appendChild(element);
-      expect(element.innerHTML).toBe("");
+      const element = renderComponent({ children: undefined });
+      expect(element).toBeEmptyDOMElement();
     });
 
     it("should render an empty paragraph when children is an empty string", () => {
       const element = renderComponent({ children: "" });
-      expect(element.innerHTML).toBe("");
+      expect(element).toBeEmptyDOMElement();
     });
   });
 });
