@@ -1,7 +1,7 @@
 {
   "name": "Paragrafts",
   "short_name": "Paragrafts",
-  "description": "Paragrafts is a lightweight, zero-dependency Lorem Ipsum generator built as a single-page application. It lets you instantly produce any number of placeholder text paragraphs — just type how many you need and hit Generate.",
+  "description": "Paragrafts is a lightweight, zero-dependency Lorem Ipsum generator built as a single-page application.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
