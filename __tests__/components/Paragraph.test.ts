@@ -44,7 +44,7 @@ describe("Paragraph", () => {
     });
 
     it("should render an empty paragraph when children is not provided", () => {
-      const element = renderComponent({ children: undefined });
+      const element = renderComponent({ children: undefined! });
       expect(element).toBeEmptyDOMElement();
     });
 
