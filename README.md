@@ -6,15 +6,6 @@ This project was created primarily for **educational and learning purposes**.
 While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
 The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
 
-## Getting Started
-
-1. Clone the repository
-2. Navigate to the project folder
-3. Execute: `npm install`
-4. Execute: `npm run dev`
-
-The application will open automatically at `http://localhost:3000`
-
 ## Description
 
 **Paragrafts** is a lightweight, zero-dependency Lorem Ipsum generator built as a single-page application. It lets you instantly produce any number of placeholder text paragraphs — just type how many you need and hit **Generate**.
@@ -27,12 +18,16 @@ Under the hood, Paragrafts is written in vanilla TypeScript with no framework, c
 
 ## Technologies used
 
+The stack is intentionally minimal — no UI framework, no runtime libraries — relying only on the language, the browser, and a modern build tool:
+
 1. Typescript
 2. CSS3
 3. HTML5
 4. Vite
 
 ## Libraries used
+
+Since there are no production dependencies, every library below is a development tool that supports building, testing, linting, or formatting the project.
 
 #### Dependencies
 
@@ -64,11 +59,20 @@ No production dependencies - Pure Vanilla TypeScript
 "vite": "^7.1.6"
 ```
 
-## Portfolio Link
+## Getting Started
 
-[`https://www.diegolibonati.com.ar/#/project/paragrafts`](https://www.diegolibonati.com.ar/#/project/paragrafts)
+With the stack above in mind, here is how to run the project locally:
+
+1. Clone the repository
+2. Navigate to the project folder
+3. Execute: `npm install`
+4. Execute: `npm run dev`
+
+The application will open automatically at `http://localhost:3000`
 
 ## Testing
+
+Once the app is running locally, you can verify behavior with the Jest test suite:
 
 1. Navigate to the project folder
 2. Execute: `npm test`
@@ -79,7 +83,9 @@ For coverage report:
 npm run test:coverage
 ```
 
-## Security
+## Security Audit
+
+Beyond functional tests, the dependency tree is audited for known vulnerabilities.
 
 ### npm audit
 
@@ -92,3 +98,7 @@ npm audit
 ## Known Issues
 
 None at the moment.
+
+## Portfolio Link
+
+[`https://www.diegolibonati.com.ar/#/project/paragrafts`](https://www.diegolibonati.com.ar/#/project/paragrafts)
