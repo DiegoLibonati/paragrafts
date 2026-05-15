@@ -61,6 +61,18 @@ describe("ParagraftsPage", () => {
       expect(article).toBeInTheDocument();
       expect(article.children).toHaveLength(0);
     });
+
+    it("should have the paragrafts-page class on the main element", () => {
+      renderPage();
+      expect(
+        screen.getByRole("main", { name: "Lorem ipsum generator" })
+      ).toHaveClass("paragrafts-page");
+    });
+
+    it("should render the paragraphs label", () => {
+      renderPage();
+      expect(screen.getByText("Paragraphs:")).toBeInTheDocument();
+    });
   });
 
   describe("behavior", () => {
@@ -147,6 +159,39 @@ describe("ParagraftsPage", () => {
             ".paragrafts__paragraph"
           );
         expect(generatedParagraphs).toHaveLength(0);
+      });
+
+      it("should generate 0 paragraphs when input value is negative", async () => {
+        const user = userEvent.setup();
+        renderPage();
+        const input = screen.getByLabelText("Number of paragraphs");
+        const button = screen.getByRole("button", {
+          name: "Generate lorem ipsum paragraphs",
+        });
+        await user.type(input, "-3");
+        await user.click(button);
+        const generatedParagraphs =
+          document.querySelectorAll<HTMLParagraphElement>(
+            ".paragrafts__paragraph"
+          );
+        expect(generatedParagraphs).toHaveLength(0);
+      });
+
+      it("should select a different paragraph based on random value", async () => {
+        jest.spyOn(Math, "random").mockReturnValue(0.5);
+        const user = userEvent.setup();
+        renderPage();
+        const input = screen.getByLabelText("Number of paragraphs");
+        const button = screen.getByRole("button", {
+          name: "Generate lorem ipsum paragraphs",
+        });
+        await user.type(input, "1");
+        await user.click(button);
+        expect(
+          screen.getByText(
+            "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          )
+        ).toBeInTheDocument();
       });
     });
   });

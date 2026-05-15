@@ -52,5 +52,12 @@ describe("Paragraph", () => {
       const element = renderComponent({ children: "" });
       expect(element).toBeEmptyDOMElement();
     });
+
+    it("should render HTML content when children contains HTML tags", () => {
+      renderComponent({ children: "<strong>bold text</strong>" });
+      const strong = document.querySelector<HTMLElement>("strong");
+      expect(strong).toBeInTheDocument();
+      expect(strong).toHaveTextContent("bold text");
+    });
   });
 });
