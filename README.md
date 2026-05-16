@@ -95,6 +95,49 @@ Check for vulnerabilities in dependencies:
 npm audit
 ```
 
+## Continuous Integration
+
+The repository ships with a **GitHub Actions** pipeline defined in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs automatically on every `push` and `pull_request` targeting the `main` branch.
+
+### Pipeline overview
+
+```
+                       ┌─── PR or push to main ───┐
+                       ▼                          ▼
+┌────────────────────────┐  ┌────────────────────┐  ┌────────────────────┐
+│    lint-and-audit      │─▶│       testing      │─▶│        build       │
+│ eslint · tsc --noEmit  │  │  jest (jsdom env)  │  │  vite production   │
+└────────────────────────┘  └────────────────────┘  └────────────────────┘
+```
+
+### Validation jobs (run on every PR and push)
+
+1. **`lint-and-audit`** — runs `npm run lint` (ESLint with `typescript-eslint`) and `npm run type-check` (`tsc --noEmit`) to enforce code style and TypeScript correctness.
+2. **`testing`** — runs the full Jest test suite with `npm test` in the `jsdom` environment. Depends on `lint-and-audit`.
+3. **`build`** — runs `npm run build` (type-check + Vite production bundle) as a smoke test that the project compiles cleanly. Depends on `testing`.
+
+All jobs run on `ubuntu-latest`, install dependencies with `npm ci`, use the Node.js version pinned in [`.nvmrc`](.nvmrc), and cache `npm` between runs.
+
+### Running the same checks locally
+
+```bash
+# lint-and-audit
+npm run lint
+npm run type-check
+
+# testing
+npm test
+
+# build
+npm run build
+```
+
+### Where the CI logs live
+
+| Output                                 | Location                  |
+| -------------------------------------- | ------------------------- |
+| Lint, type-check, test, and build logs | **Actions** tab on GitHub |
+
 ## Known Issues
 
 None at the moment.
